@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LM STORE</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="container header">
+        <a href="index.html" class="logo"> LM </a>
+
+        <nav class="nav">
+          <a href="index.html"> Главная </a>
+
+          <a href="#catalog"> Каталог </a>
+
+          <a href="html/cart.html"> Корзина </a>
+
+          <a href="html/auth.html"> Вход / Регистрация </a>
+        </nav>
+
+        <div class="header-right">
+          <div id="userArea">
+            <a href="html/auth.html"> Вход </a>
+          </div>
+
+          <a href="html/cart.html" class="cart-btn">
+            <img src="img/basket.png" alt="Корзина" class="cart-icon" />
+
+            <span id="cartCounter"> 0 </span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-subtitle"> NEW COLLECTION </span>
+
+        <h1 class="hero-title">Новая коллекция одежды</h1>
+
+        <p class="hero-text">Стиль начинается с деталей</p>
+
+        <a href="#catalog" class="hero-button"> Смотреть каталог </a>
+      </div>
+    </section>
+
+    <section class="search-section">
+      <div class="container">
+        <div class="search-wrapper">
+          <input
+            type="text"
+            id="search"
+            placeholder="Поиск товара..."
+            oninput="searchProducts()"
+          />
+
+          <select id="sort" onchange="sortProducts(this.value)">
+            <option value="">Сортировка</option>
+
+            <option value="asc">Цена ↑</option>
+
+            <option value="desc">Цена ↓</option>
+
+            <option value="name">По названию</option>
+          </select>
+
+          <select id="category" onchange="filterCategory()">
+            <option value="all">Все категории</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="products" id="catalog">
+      <div class="container">
+        <h2 class="section-title">Каталог товаров</h2>
+
+        <div id="productGrid" class="product-grid"></div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container footer-grid">
+        <div>
+          <h3>LM STORE</h3>
+
+          <p>
+            Современный интернет-магазин одежды. Учебный проект на HTML, CSS и
+            JavaScript.
+          </p>
+        </div>
+
+        <div>
+          <h4>Навигация</h4>
+
+          <a href="index.html"> Главная </a>
+
+          <a href="html/cart.html"> Корзина </a>
+
+          <a href="html/auth.html"> Вход </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Корзина</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="container header">
+        <a href="../index.html" class="logo"> LM </a>
+
+        <nav class="nav">
+          <a href="../index.html"> Главная </a>
+
+          <a href="cart.html"> Корзина </a>
+
+          <a href="auth.html"> Вход </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="cart-page">
+      <div class="container">
+        <h1 class="section-title">Корзина</h1>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-total">
+          Итого:
+
+          <span id="totalPrice"> 0 ₸ </span>
+        </div>
+
+        <div class="cart-buttons">
+          <a href="checkout.html" class="checkout-btn"> Оформить заказ </a>
+          <a href="../index.html"> Вернуться в каталог </a>
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/cart.js"></script>
+
+    <script>
+      function renderCart() {
+        const container = document.getElementById("cartItems");
+
+        container.innerHTML = "";
+
+        if (cart.items.length === 0) {
+          container.innerHTML = `
+
+                <div class="empty-cart">
+
+                    <h2>
+
+                        🛒 Корзина пуста
+
+                    </h2>
+
+                    <p>
+
+                        Добавьте товары в каталог.
+
+                    </p>
+
+                    <br>
+
+                    <a href="../index.html">
+
+                        Перейти в каталог
+
+                    </a>
+
+                </div>
+
+                `;
+
+          document.getElementById("totalPrice").textContent = "0 ₸";
+
+          return;
+        }
+
+        cart.items.forEach((item) => {
+          container.innerHTML += `
+
+                <div class="cart-item">
+
+                    <img
+                        src="${item.image}"
+                        alt="${item.title}"
+                    >
+
+                    <div class="cart-info">
+
+                        <h3>
+
+                            ${item.title}
+
+                        </h3>
+
+                        <p>
+
+                            Цена:
+                            ${Math.round(item.price * 500)} ₸
+
+                        </p>
+
+                        <p>
+
+                            Количество:
+                            ${item.quantity}
+
+                        </p>
+
+                    </div>
+
+                    <button
+                        onclick="removeItem(${item.id})">
+
+                        Удалить
+
+                    </button>
+
+                </div>
+
+                `;
+        });
+
+        const total = cart.items.reduce(
+          (sum, item) => sum + item.price * 500 * item.quantity,
+
+          0,
+        );
+
+        document.getElementById("totalPrice").textContent = total + " ₸";
+      }
+
+      function removeItem(id) {
+        cart.remove(id);
+
+        renderCart();
+      }
+
+      function checkout() {
+        if (cart.items.length === 0) {
+          alert("Корзина пуста");
+
+          return;
+        }
+
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+        orders.push({
+          date: new Date().toLocaleString(),
+
+          items: [...cart.items],
+
+          total: cart.getTotal(),
+        });
+
+        localStorage.setItem(
+          "orders",
+
+          JSON.stringify(orders),
+        );
+
+        alert("Заказ оформлен");
+
+        localStorage.removeItem("cart");
+
+        cart.items = [];
+
+        renderCart();
+
+        cart.updateCounter();
+      }
+
+      renderCart();
+    </script>
+  </body>
+</html>

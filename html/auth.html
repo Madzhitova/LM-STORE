@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Авторизация</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="container header">
+        <a href="../index.html" class="logo"> LM </a>
+      </div>
+    </header>
+
+    <section class="auth-page">
+      <div class="auth-container">
+        <div class="tabs">
+          <button onclick="showLogin()">Вход</button>
+
+          <button onclick="showRegister()">Регистрация</button>
+        </div>
+
+        <div id="loginForm">
+          <h2>Вход</h2>
+
+          <input type="email" id="loginEmail" placeholder="Email" />
+
+          <input type="password" id="loginPassword" placeholder="Пароль" />
+
+          <button onclick="login()">Войти</button>
+        </div>
+
+        <div id="registerForm" style="display: none">
+          <h2>Регистрация</h2>
+
+          <input type="text" id="name" placeholder="Имя" />
+
+          <input type="email" id="email" placeholder="Email" />
+
+          <input type="password" id="password" placeholder="Пароль" />
+
+          <button onclick="register()">Создать аккаунт</button>
+        </div>
+      </div>
+    </section>
+
+    <script src="../js/auth.js"></script>
+
+    <script>
+      function showLogin() {
+        document.getElementById("loginForm").style.display = "block";
+
+        document.getElementById("registerForm").style.display = "none";
+      }
+
+      function showRegister() {
+        document.getElementById("loginForm").style.display = "none";
+
+        document.getElementById("registerForm").style.display = "block";
+      }
+    </script>
+  </body>
+</html>

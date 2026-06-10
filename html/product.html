@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Товар</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="container header">
+        <a href="../index.html" class="logo"> STYLE </a>
+
+        <nav class="nav">
+          <a href="../index.html">Главная</a>
+          <a href="cart.html">Корзина</a>
+          <a href="auth.html">Вход</a>
+        </nav>
+
+        <div class="header-right">
+          <div id="userArea"></div>
+          <a href="../html/cart.html" class="cart-btn">
+            <img src="../img/basket.png" alt="Корзина" class="cart-icon" />
+
+            <span id="cartCounter"> 0 </span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- PRODUCT -->
+    <section class="product-page">
+      <div class="container">
+        <div id="productDetails" class="product-details">
+          <!-- JS вставляет сюда -->
+        </div>
+      </div>
+    </section>
+
+    <script src="../js/cart.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/product.js"></script>
+  </body>
+</html>

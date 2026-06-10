@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Оформление заказа</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="container header">
+        <a href="../index.html" class="logo"> STYLE </a>
+      </div>
+    </header>
+
+    <section class="checkout-page">
+      <div class="checkout-container">
+        <h1>Оформление заказа</h1>
+
+        <input id="customerName" placeholder="Имя" />
+
+        <input id="address" placeholder="Адрес" />
+
+        <input id="phone" placeholder="Телефон" />
+
+        <hr />
+
+        <input id="cardNumber" placeholder="Номер карты" />
+
+        <input id="cardHolder" placeholder="Владелец карты" />
+
+        <label>
+          <input type="checkbox" id="saveCard" />
+
+          Сохранить карту
+        </label>
+
+        <button onclick="payOrder()">Оплатить</button>
+      </div>
+    </section>
+
+    <script>
+      loadSavedCard();
+
+      function loadSavedCard() {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        if (!currentUser) return;
+
+        const savedCard = JSON.parse(
+          localStorage.getItem(`card_${currentUser.email}`),
+        );
+
+        if (savedCard) {
+          document.getElementById("cardNumber").value = savedCard.number;
+
+          document.getElementById("cardHolder").value = savedCard.holder;
+        }
+      }
+
+      function payOrder() {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        if (!currentUser) {
+          alert("Сначала войдите в аккаунт");
+
+          return;
+        }
+
+        const cardData = {
+          number: document.getElementById("cardNumber").value,
+
+          holder: document.getElementById("cardHolder").value,
+        };
+
+        if (document.getElementById("saveCard").checked) {
+          localStorage.setItem(
+            `card_${currentUser.email}`,
+
+            JSON.stringify(cardData),
+          );
+        }
+
+        alert("Заказ успешно оформлен!");
+
+        localStorage.removeItem("cart");
+
+        location.href = "../index.html";
+      }
+    </script>
+  </body>
+</html>
